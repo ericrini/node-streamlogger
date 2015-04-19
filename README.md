@@ -28,12 +28,27 @@ var log2 = StreamLogger.LogFactory.create('unstable.component');
 log1.setLogLevel('debug');
 ```
 
-Logs can be output to any node.js stream. For convenience a console transport implementation is included.
+Logs can be output to any node.js stream running in object mode. The raw stream events look like this.
+```
+{
+    type: 'log',
+    meta: {
+        name: 'logger.name',
+        level: [1,2,3,4,5],
+        timestamp: '2000-01-01T00:00:00+00:00'
+    },
+    payload: {
+        message: 'The formatted log message.'
+    }
+}
+```
+
+For convenience a console transport implementation is included.
 ```
 LogFactory.pipe(new StreamLogger.ConsoleTransport());
 ```
 
-The console output might look like this. It's nicely colorized as well.
+The ConsoleTransport will send nice colorized ASCII to the stdout and stderr streams. However custom implementations could send JSON data to a flat file or TCP data to a log aggregation server.
 ```
 01/01/01 00:00:00 | info  | component1.name      | message content
 01/01/01 00:00:00 | error | component1.name      | message content
