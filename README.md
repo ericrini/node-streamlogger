@@ -51,11 +51,11 @@ LogFactory.pipe(new StreamLogger.ConsoleTransport());
 The ConsoleTransport will send nice colorized ASCII to the stdout and stderr streams. However custom implementations could send JSON data to a flat file or TCP data to a log aggregation server.
 ```
 01/01/01 00:00:00 | info  | component1.name      | message content
-01/01/01 00:00:00 | error | component1.name      | message content
+01/01/01 00:00:00 | error | component1.name      | error message
     stack trace...
     stack trace...
     stack trace...
-01/01/01 00:00:00 | info  | component2.name      | message content
+01/01/01 00:00:00 | info  | component2.name      | log entry { something: 'something' } with some JSON 
 ```
 
 # Development
