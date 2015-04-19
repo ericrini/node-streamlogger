@@ -18,11 +18,14 @@ There is also a fatal log level. This will cause the process to shutdown (via SI
 log.fatal('Holy FUBAR!');
 ```
 
-Multiple loggers can be setup, and each will be treated independently. The log output of each logger can be configured independently. For example, stable components can be set to warn\error, while newer components can be set to debug levels.
+Multiple loggers can exist at the same time. The output of each logger can be configured independently. For example, stable components can be set to warn\error, while newer components can be set to debug levels.
 ```
 var syslog = StreamLogger.LogFactory.create('system');
-var log1 = StreamLogger.LogFactory.create('application.component.1');
-var log2 = StreamLogger.LogFactory.create('application.component.2');
+syslog.setLogLevel('warn');
+var log1 = StreamLogger.LogFactory.create('stable.component');
+log1.setLogLevel('info');
+var log2 = StreamLogger.LogFactory.create('unstable.component');
+log1.setLogLevel('debug');
 ```
 
 Logs can be output to any node.js stream. For convenience a console transport implementation is included.
